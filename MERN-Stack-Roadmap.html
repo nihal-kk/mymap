@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERN Stack Roadmap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50, #4a6572);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .roadmap {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .month {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .month-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .month-content {
+            display: grid;
+            gap: 20px;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.5s ease;
+        }
+        
+        .month.active .month-content {
+            max-height: 10000px;
+        }
+        
+        .month.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .week {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .week-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #8BC34A;
+        }
+        
+        .days {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .day {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .day-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .day-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .sunday {
+            border-left: 4px solid #f44336;
+        }
+        
+        .saturday {
+            border-left: 4px solid #2196F3;
+        }
+        
+        .topic {
+            margin-bottom: 10px;
+        }
+        
+        .topic strong {
+            color: #8BC34A;
+        }
+        
+        .tasks {
+            margin-bottom: 10px;
+        }
+        
+        .tasks strong {
+            color: #FFC107;
+        }
+        
+        .tasks ol {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .game {
+            margin-bottom: 10px;
+        }
+        
+        .game strong {
+            color: #E91E63;
+        }
+        
+        .project {
+            background: rgba(33, 150, 243, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        
+        .project strong {
+            color: #2196F3;
+        }
+        
+        .leave {
+            text-align: center;
+            font-style: italic;
+            opacity: 0.8;
+            padding: 10px;
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .month-title {
+                font-size: 1.5rem;
+            }
+            
+            .week-title {
+                font-size: 1.2rem;
+            }
+            
+            .day-title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MERN Stack Roadmap</h1>
+            <p class="subtitle">5-Month Plan to Master Full-Stack Development</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="progress-text" id="progressText">0% Complete</p>
+        </header>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="javascript">JavaScript</button>
+            <button class="filter-btn" data-filter="nodejs">Node.js</button>
+            <button class="filter-btn" data-filter="mongodb">MongoDB</button>
+            <button class="filter-btn" data-filter="react">React</button>
+            <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        </div>
+        
+        <div class="roadmap" id="roadmap">
+            <!-- Month 1 -->
+            <div class="month active" data-month="1" data-category="javascript">
+                <div class="month-header">
+                    <h2 class="month-title">Month 1 – JavaScript Fundamentals</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="month-content">
+                    <!-- Week 1 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 1 – JavaScript Basics</h3>
+                        <div class="days">
+                            <!-- Day 1 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 1 – Variables & Data Types</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> var, let, const, Data Types
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create variables storing your name (string), age (number), and isStudent (boolean)</li>
+                                        <li>Convert a string "123" to number and add 10</li>
+                                        <li>Create an array with 5 different data types and print each</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Data Type Matcher - Match values to correct data types
+                                </div>
+                            </div>
+                            
+                            <!-- Day 2 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 2 – Operators & Conditionals</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Arithmetic, Comparison, Logical Operators, if-else, switch
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Calculate BMI using weight/height²</li>
+                                        <li>Check if a number is positive, negative, or zero</li>
+                                        <li>Use switch to print grade based on score (A:90-100, B:80-89, etc.)</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Operator Puzzle - Fix broken expressions to get correct output
+                                </div>
+                            </div>
+                            
+                            <!-- Day 3 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 3 – Loops</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> for, while, do-while, for...in, for...of
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Print numbers 1-10 using each loop type</li>
+                                        <li>Calculate sum of array elements using reduce()</li>
+                                        <li>Iterate over object properties and print key-value pairs</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Loop Runner - Navigate through obstacles using correct loops
+                                </div>
+                            </div>
+                            
+                            <!-- Day 4 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 4 – Functions</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Function Declarations, Expressions, Arrow Functions, Parameters
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create a function to reverse a string</li>
+                                        <li>Write an arrow function to calculate factorial</li>
+                                        <li>Build a function that accepts callback and processes array</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Function Builder - Assemble function parts to solve puzzles
+                                </div>
+                            </div>
+                            
+                            <!-- Day 5 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 5 – Arrays & Methods</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Array Methods (map, filter, reduce, find, slice)
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Use map() to create new array with squared numbers</li>
+                                        <li>Filter array to get only even numbers</li>
+                                        <li>Find and return first object with specific property</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Array Adventure - Transform arrays to unlock treasures
+                                </div>
+                            </div>
+                            
+                            <!-- Day 6 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 6 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Console-Based Calculator
+                                    <ul>
+                                        <li>Accept two numbers and operator (+, -, *, /)</li>
+                                        <li>Perform calculation and show result</li>
+                                        <li>Handle division by zero error</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 7 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 7 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 2 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 2 – Intermediate JavaScript</h3>
+                        <div class="days">
+                            <!-- Day 8 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 8 – Objects & Prototypes</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Object Literals, Constructors, Prototypes, this
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create a car object with properties and methods</li>
+                                        <li>Build a constructor function for User</li>
+                                        <li>Add method to prototype shared by all instances</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Object Explorer - Navigate object properties to find hidden keys
+                                </div>
+                            </div>
+                            
+                            <!-- Day 9 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 9 – ES6+ Features</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Destructuring, Spread/Rest, Template Literals, Classes
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Destructure an object into variables</li>
+                                        <li>Merge arrays using spread operator</li>
+                                        <li>Create a class with getter/setter</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> ES6 Transformer - Convert old code to modern ES6+
+                                </div>
+                            </div>
+                            
+                            <!-- Day 10 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 10 – DOM Manipulation</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Selectors, Element Creation, Event Listeners
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Change text content of heading on button click</li>
+                                        <li>Add/remove CSS classes dynamically</li>
+                                        <li>Create and append new list items</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> DOM Builder - Build webpage by manipulating DOM elements
+                                </div>
+                            </div>
+                            
+                            <!-- Day 11 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 11 – Events & Event Handling</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Event Bubbling, Delegation, Common Events
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Show mouse coordinates on mousemove</li>
+                                        <li>Validate form on submit</li>
+                                        <li>Use event delegation for dynamic buttons</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Event Catcher - Capture events to prevent them from escaping
+                                </div>
+                            </div>
+                            
+                            <!-- Day 12 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 12 – Asynchronous JavaScript</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Callbacks, Promises, async/await
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Simulate API call with setTimeout callback</li>
+                                        <li>Chain promises for sequential operations</li>
+                                        <li>Fetch data from API using async/await</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Async Race - Complete async operations in correct order
+                                </div>
+                            </div>
+                            
+                            <!-- Day 13 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 13 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Interactive To-Do List
+                                    <ul>
+                                        <li>Add/delete tasks</li>
+                                        <li>Mark tasks as complete</li>
+                                        <li>Store tasks in array</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 14 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 14 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 3 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 3 – Advanced JavaScript</h3>
+                        <div class="days">
+                            <!-- Day 15 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 15 – Closures & Scope</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Global/Local Scope, Lexical Scope, Closures
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create counter with closure</li>
+                                        <li>Build function that returns another function</li>
+                                        <li>Demonstrate block vs function scope</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Scope Detective - Identify variable scopes in code snippets
+                                </div>
+                            </div>
+                            
+                            <!-- Day 16 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 16 – Error Handling & Debugging</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> try/catch/finally, Custom Errors, Debugging Tools
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Handle JSON parsing errors</li>
+                                        <li>Create custom error type</li>
+                                        <li>Debug code using console methods</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Bug Hunter - Find and fix errors in code snippets
+                                </div>
+                            </div>
+                            
+                            <!-- Day 17 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 17 – Modules & Tooling</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> ES Modules, CommonJS, Package Managers
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Export/import functions between files</li>
+                                        <li>Install and use lodash package</li>
+                                        <li>Bundle code with Webpack</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Module Puzzle - Connect modules to complete application
+                                </div>
+                            </div>
+                            
+                            <!-- Day 18 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 18 – Functional Programming</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Immutability, Pure Functions, Higher-Order Functions
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Write pure function to calculate area</li>
+                                        <li>Use map/filter/reduce for data transformation</li>
+                                        <li>Implement immutability with Object.freeze</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> FP Challenge - Transform data without mutations
+                                </div>
+                            </div>
+                            
+                            <!-- Day 19 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 19 – Testing Fundamentals</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Unit Testing, Test Frameworks (Jest)
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Write test for sum function</li>
+                                        <li>Test async function</li>
+                                        <li>Mock external dependency</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Test Runner - Pass tests to unlock next level
+                                </div>
+                            </div>
+                            
+                            <!-- Day 20 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 20 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Recipe Finder
+                                    <ul>
+                                        <li>Filter recipes by ingredients</li>
+                                        <li>Use functional programming methods</li>
+                                        <li>Modular code structure</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 21 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 21 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 4 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 4 – JavaScript Patterns & Best Practices</h3>
+                        <div class="days">
+                            <!-- Day 22 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 22 – Design Patterns</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Module, Revealing Module, Observer Patterns
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement module pattern for calculator</li>
+                                        <li>Create event system with observer pattern</li>
+                                        <li>Use revealing module for data privacy</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Pattern Builder - Select correct patterns for scenarios
+                                </div>
+                            </div>
+                            
+                            <!-- Day 23 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 23 – Performance Optimization</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Time Complexity, Memory Management, Optimization
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Optimize nested loops</li>
+                                        <li>Implement memoization</li>
+                                        <li>Measure performance with performance API</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Optimization Race - Improve code speed to win
+                                </div>
+                            </div>
+                            
+                            <!-- Day 24 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 24 – Modern JavaScript Features</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Optional Chaining, Nullish Coalescing, Dynamic Imports
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Use optional chaining for nested objects</li>
+                                        <li>Provide default values with nullish coalescing</li>
+                                        <li>Implement lazy loading with dynamic imports</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Modern JS Quest - Use new features to solve challenges
+                                </div>
+                            </div>
+                            
+                            <!-- Day 25 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 25 – Security Best Practices</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> XSS Prevention, CSRF Protection, Secure Coding
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Sanitize user input</li>
+                                        <li>Implement content security policy</li>
+                                        <li>Prevent prototype pollution</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Security Fortress - Defend against vulnerabilities
+                                </div>
+                            </div>
+                            
+                            <!-- Day 26 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 26 – Code Quality & Tools</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Linting, Formatting, Code Analysis
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Set up ESLint configuration</li>
+                                        <li>Format code with Prettier</li>
+                                        <li>Analyze code complexity</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Code Quality Inspector - Fix code quality issues
+                                </div>
+                            </div>
+                            
+                            <!-- Day 27 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 27 – Monthly Project</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> JavaScript Game Engine
+                                    <ul>
+                                        <li>Build simple 2D game</li>
+                                        <li>Implement game loop</li>
+                                        <li>Use design patterns</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 28 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 28 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 2 -->
+            <div class="month" data-month="2" data-category="nodejs">
+                <div class="month-header">
+                    <h2 class="month-title">Month 2 – Node.js & Express.js</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="month-content">
+                    <!-- Week 5 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 5 – Node.js Fundamentals</h3>
+                        <div class="days">
+                            <!-- Day 29 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 29 – Node.js Basics</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Event Loop, Modules, File System
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create simple HTTP server</li>
+                                        <li>Read/write files synchronously</li>
+                                        <li>Use path module for file paths</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Event Loop Simulator - Manage events in correct order
+                                </div>
+                            </div>
+                            
+                            <!-- Day 30 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 30 – NPM & Modules</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Package Management, Local/Global Packages
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Initialize project with package.json</li>
+                                        <li>Install and use axios package</li>
+                                        <li>Create and publish own module</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Package Manager Adventure - Collect packages to build app
+                                </div>
+                            </div>
+                            
+                            <!-- Day 31 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 31 – Asynchronous Node.js</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Callbacks, Promises, Event Emitters
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Read file asynchronously</li>
+                                        <li>Create custom event emitter</li>
+                                        <li>Chain promises for file operations</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Async Node Race - Complete async operations efficiently
+                                </div>
+                            </div>
+                            
+                            <!-- Day 32 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 32 – Streams & Buffers</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Readable/Writable Streams, Pipe, Buffer
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Read large file with streams</li>
+                                        <li>Transform stream data</li>
+                                        <li>Pipe readable to writable stream</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Stream Flow - Direct streams to correct destinations
+                                </div>
+                            </div>
+                            
+                            <!-- Day 33 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 33 – Express.js Introduction</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Routing, Middleware, Request/Response
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create Express server</li>
+                                        <li>Define GET/POST routes</li>
+                                        <li>Use middleware for logging</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Route Navigator - Guide requests through correct routes
+                                </div>
+                            </div>
+                            
+                            <!-- Day 34 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 34 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> REST API Server
+                                    <ul>
+                                        <li>CRUD operations for books</li>
+                                        <li>Route parameters</li>
+                                        <li>JSON responses</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 35 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 35 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 6 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 6 – Express.js Advanced</h3>
+                        <div class="days">
+                            <!-- Day 36 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 36 – Middleware & Routing</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Application/Router Middleware, Error Handling
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create authentication middleware</li>
+                                        <li>Implement route groups</li>
+                                        <li>Handle 404 and 500 errors</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Middleware Maze - Navigate through middleware chain
+                                </div>
+                            </div>
+                            
+                            <!-- Day 37 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 37 – Template Engines</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> EJS, Pug, Dynamic Rendering
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Render dynamic HTML with EJS</li>
+                                        <li>Create partials for header/footer</li>
+                                        <li>Pass data to templates</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Template Builder - Construct templates with correct syntax
+                                </div>
+                            </div>
+                            
+                            <!-- Day 38 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 38 – Authentication & Security</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> JWT, Sessions, Security Headers
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement JWT authentication</li>
+                                        <li>Create password reset flow</li>
+                                        <li>Add security headers</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Auth Protector - Defend routes from unauthorized access
+                                </div>
+                            </div>
+                            
+                            <!-- Day 39 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 39 – Database Integration</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> MongoDB Connection, Mongoose ODM
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Connect to MongoDB</li>
+                                        <li>Define schema and model</li>
+                                        <li>Perform CRUD operations</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Database Explorer - Navigate database collections
+                                </div>
+                            </div>
+                            
+                            <!-- Day 40 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 40 – API Documentation</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Swagger, API Testing
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Document API with Swagger</li>
+                                        <li>Test API endpoints</li>
+                                        <li>Validate request/response schemas</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> API Inspector - Verify API correctness
+                                </div>
+                            </div>
+                            
+                            <!-- Day 41 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 41 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> User Management API
+                                    <ul>
+                                        <li>User registration/login</li>
+                                        <li>Profile management</li>
+                                        <li>Role-based access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 42 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 42 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 7 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 7 – Testing & Deployment</h3>
+                        <div class="days">
+                            <!-- Day 43 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 43 – Testing Node.js</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Unit/Integration Testing, Mocha/Chai
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Test Express routes</li>
+                                        <li>Mock database calls</li>
+                                        <li>Test middleware</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Test Champion - Write tests to cover all scenarios
+                                </div>
+                            </div>
+                            
+                            <!-- Day 44 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 44 – Error Handling & Logging</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Error Handling Patterns, Winston Logging
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement global error handler</li>
+                                        <li>Set up file logging</li>
+                                        <li>Create error monitoring</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Error Tracker - Catch and categorize errors
+                                </div>
+                            </div>
+                            
+                            <!-- Day 45 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 45 – Performance & Scalability</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Clustering, Caching, Load Testing
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement clustering</li>
+                                        <li>Add Redis caching</li>
+                                        <li>Perform load testing</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Scale Master - Handle increasing traffic
+                                </div>
+                            </div>
+                            
+                            <!-- Day 46 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 46 – Deployment Basics</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> PM2, Environment Variables, Process Management
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Deploy app with PM2</li>
+                                        <li>Configure environment variables</li>
+                                        <li>Set up process monitoring</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Deployment Quest - Deploy app to production
+                                </div>
+                            </div>
+                            
+                            <!-- Day 47 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 47 – Microservices</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Service Communication, API Gateways
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create microservice architecture</li>
+                                        <li>Implement service communication</li>
+                                        <li>Set up API gateway</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Service Connector - Link microservices together
+                                </div>
+                            </div>
+                            
+                            <!-- Day 48 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 48 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> E-commerce API
+                                    <ul>
+                                        <li>Products, orders, users</li>
+                                        <li>Payment integration</li>
+                                        <li>Inventory management</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 49 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 49 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 8 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 8 – Advanced Node.js</h3>
+                        <div class="days">
+                            <!-- Day 50 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 50 – GraphQL</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Schemas, Resolvers, Queries/Mutations
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create GraphQL server</li>
+                                        <li>Define types and resolvers</li>
+                                        <li>Implement queries and mutations</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> GraphQL Explorer - Navigate GraphQL schema
+                                </div>
+                            </div>
+                            
+                            <!-- Day 51 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 51 – WebSockets</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Socket.io, Real-time Communication
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create WebSocket server</li>
+                                        <li>Implement chat functionality</li>
+                                        <li>Handle connection events</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Real-time Race - Win with fastest real-time updates
+                                </div>
+                            </div>
+                            
+                            <!-- Day 52 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 52 – Serverless</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> AWS Lambda, Serverless Framework
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create serverless function</li>
+                                        <li>Set up API Gateway</li>
+                                        <li>Deploy serverless app</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Serverless Challenge - Build app without servers
+                                </div>
+                            </div>
+                            
+                            <!-- Day 53 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 53 – DevOps Practices</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> CI/CD, Docker, Kubernetes
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Containerize app with Docker</li>
+                                        <li>Set up CI/CD pipeline</li>
+                                        <li>Deploy to Kubernetes</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> DevOps Master - Automate deployment pipeline
+                                </div>
+                            </div>
+                            
+                            <!-- Day 54 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 54 – Monitoring & Analytics</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Application Monitoring, Error Tracking
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement APM monitoring</li>
+                                        <li>Set up error tracking</li>
+                                        <li>Create performance dashboards</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Monitor Guardian - Keep application healthy
+                                </div>
+                            </div>
+                            
+                            <!-- Day 55 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 55 – Monthly Project</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Real-time Analytics Dashboard
+                                    <ul>
+                                        <li>WebSocket data streaming</li>
+                                        <li>Real-time charts</li>
+                                        <li>Performance metrics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 56 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 56 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 3 -->
+            <div class="month" data-month="3" data-category="mongodb">
+                <div class="month-header">
+                    <h2 class="month-title">Month 3 – MongoDB</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="month-content">
+                    <!-- Week 9 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 9 – MongoDB Fundamentals</h3>
+                        <div class="days">
+                            <!-- Day 57 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 57 – MongoDB Basics</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Document Structure, CRUD Operations
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Insert documents in collection</li>
+                                        <li>Query documents with filters</li>
+                                        <li>Update and delete documents</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Document Hunter - Find specific documents in database
+                                </div>
+                            </div>
+                            
+                            <!-- Day 58 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 58 – Query Operators</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Comparison, Logical, Element Operators
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Find documents with $gt/$lt</li>
+                                        <li>Use $or/$and for complex queries</li>
+                                        <li>Query by array elements</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Query Challenge - Build correct queries to retrieve data
+                                </div>
+                            </div>
+                            
+                            <!-- Day 59 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 59 – Data Modeling</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Schema Design, Embedding, Referencing
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Design schema for blog application</li>
+                                        <li>Implement embedded documents</li>
+                                        <li>Create references between collections</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Schema Architect - Build optimal data models
+                                </div>
+                            </div>
+                            
+                            <!-- Day 60 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 60 – Aggregation Framework</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Pipeline Stages, Operators
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Group documents with $group</li>
+                                        <li>Filter with $match</li>
+                                        <li>Calculate averages with $avg</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Aggregation Builder - Construct pipelines to transform data
+                                </div>
+                            </div>
+                            
+                            <!-- Day 61 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 61 – Indexing</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Index Types, Performance Optimization
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create single-field index</li>
+                                        <li>Implement compound index</li>
+                                        <li>Analyze query performance</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Index Optimizer - Speed up slow queries
+                                </div>
+                            </div>
+                            
+                            <!-- Day 62 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 62 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Blog Database
+                                    <ul>
+                                        <li>Posts, comments, users</li>
+                                        <li>Tagging system</li>
+                                        <li>Search functionality</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 63 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 63 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 10 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 10 – MongoDB Advanced</h3>
+                        <div class="days">
+                            <!-- Day 64 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 64 – Transactions</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Multi-document ACID Transactions
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Start transaction session</li>
+                                        <li>Transfer funds between accounts</li>
+                                        <li>Handle transaction errors</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Transaction Master - Maintain data consistency
+                                </div>
+                            </div>
+                            
+                            <!-- Day 65 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 65 – Security</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Authentication, Authorization, Encryption
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Enable authentication</li>
+                                        <li>Create user roles</li>
+                                        <li>Implement field-level encryption</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Security Guardian - Protect database from threats
+                                </div>
+                            </div>
+                            
+                            <!-- Day 66 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 66 – Scaling</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Sharding, Replication
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Configure replica set</li>
+                                        <li>Implement sharding</li>
+                                        <li>Balance cluster load</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Scale Architect - Handle growing data volumes
+                                </div>
+                            </div>
+                            
+                            <!-- Day 67 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 67 – MongoDB Atlas</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Cloud Database, Atlas Features
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create Atlas cluster</li>
+                                        <li>Configure data lake</li>
+                                        <li>Set up Atlas Search</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Cloud Explorer - Navigate Atlas features
+                                </div>
+                            </div>
+                            
+                            <!-- Day 68 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 68 – Performance Tuning</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Query Optimization, Profiler
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Use profiler to analyze queries</li>
+                                        <li>Optimize aggregation pipelines</li>
+                                        <li>Tune memory settings</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Performance Tuner - Maximize database speed
+                                </div>
+                            </div>
+                            
+                            <!-- Day 69 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 69 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> E-commerce Database
+                                    <ul>
+                                        <li>Products, orders, inventory</li>
+                                        <li>Recommendation engine</li>
+                                        <li>Analytics pipeline</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 70 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 70 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 11 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 11 – MongoDB Ecosystem</h3>
+                        <div class="days">
+                            <!-- Day 71 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 71 – MongoDB with Node.js</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Mongoose, Schema Validation
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Define Mongoose schema</li>
+                                        <li>Implement validation</li>
+                                        <li>Create model methods</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Mongoose Modeler - Build data models with validation
+                                </div>
+                            </div>
+                            
+                            <!-- Day 72 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 72 – MongoDB Compass</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> GUI Tool, Visualization
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Connect to database with Compass</li>
+                                        <li>Visualize schema</li>
+                                        <li>Build aggregation pipelines</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Compass Explorer - Navigate database visually
+                                </div>
+                            </div>
+                            
+                            <!-- Day 73 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 73 – Change Streams</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Real-time Data Changes
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create change stream</li>
+                                        <li>React to document changes</li>
+                                        <li>Implement real-time updates</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Change Stream Catcher - React to database changes
+                                </div>
+                            </div>
+                            
+                            <!-- Day 74 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 74 – MongoDB BI Connector</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Data Analytics, SQL Interface
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Connect BI tool to MongoDB</li>
+                                        <li>Create SQL queries</li>
+                                        <li>Build analytics dashboard</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> BI Analyst - Generate insights from data
+                                </div>
+                            </div>
+                            
+                            <!-- Day 75 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 75 – MongoDB Mobile</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Offline-first Applications
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Set up mobile sync</li>
+                                        <li>Implement conflict resolution</li>
+                                        <li>Build offline-capable app</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Mobile Sync Master - Keep data synchronized
+                                </div>
+                            </div>
+                            
+                            <!-- Day 76 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 76 – Monthly Project</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Real-time Analytics Platform
+                                    <ul>
+                                        <li>Change streams for live data</li>
+                                        <li>Aggregation for metrics</li>
+                                        <li>Visualization dashboard</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 77 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 77 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 4 -->
+            <div class="month" data-month="4" data-category="react">
+                <div class="month-header">
+                    <h2 class="month-title">Month 4 – React.js</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="month-content">
+                    <!-- Week 12 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 12 – React Basics</h3>
+                        <div class="days">
+                            <!-- Day 78 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 78 – React Fundamentals</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Components, JSX, Props
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create functional component</li>
+                                        <li>Pass props to child component</li>
+                                        <li>Render lists with JSX</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Component Builder - Assemble UI components like LEGO
+                                </div>
+                            </div>
+                            
+                            <!-- Day 79 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 79 – State & Hooks</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> useState, Event Handling
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create counter with useState</li>
+                                        <li>Handle form input state</li>
+                                        <li>Toggle UI elements</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> State Manager - Control component states to win
+                                </div>
+                            </div>
+                            
+                            <!-- Day 80 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 80 – Conditional Rendering</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Ternary, &&, Element Variables
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Show/hide elements conditionally</li>
+                                        <li>Render different components based on state</li>
+                                        <li>Implement loading states</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Conditional Renderer - Show correct UI based on conditions
+                                </div>
+                            </div>
+                            
+                            <!-- Day 81 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 81 – Lists & Keys</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Rendering Lists, Unique Keys
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Render array of items</li>
+                                        <li>Implement unique keys</li>
+                                        <li>Handle list interactions</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> List Organizer - Sort and filter lists correctly
+                                </div>
+                            </div>
+                            
+                            <!-- Day 82 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 82 – Forms in React</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Controlled Components, Form Handling
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create controlled form</li>
+                                        <li>Validate form inputs</li>
+                                        <li>Handle form submission</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Form Validator - Complete forms with validation
+                                </div>
+                            </div>
+                            
+                            <!-- Day 83 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 83 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Task Manager UI
+                                    <ul>
+                                        <li>Add/delete tasks</li>
+                                        <li>Mark tasks complete</li>
+                                        <li>Filter tasks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 84 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 84 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 13 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 13 – React Advanced</h3>
+                        <div class="days">
+                            <!-- Day 85 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 85 – Effects & Data Fetching</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> useEffect, API Integration
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Fetch data on component mount</li>
+                                        <li>Clean up subscriptions</li>
+                                        <li>Handle loading/error states</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Data Fetcher - Retrieve data efficiently
+                                </div>
+                            </div>
+                            
+                            <!-- Day 86 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 86 – Context API</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Global State, Provider/Consumer
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create context for theme</li>
+                                        <li>Implement provider</li>
+                                        <li>Consume context in components</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Context Navigator - Share state across components
+                                </div>
+                            </div>
+                            
+                            <!-- Day 87 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 87 – Custom Hooks</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Reusable Logic, Hook Rules
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create custom hook for API calls</li>
+                                        <li>Build form validation hook</li>
+                                        <li>Implement localStorage hook</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Hook Designer - Create reusable logic blocks
+                                </div>
+                            </div>
+                            
+                            <!-- Day 88 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 88 – React Router</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Navigation, Routes, Params
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Set up routing</li>
+                                        <li>Create navigation links</li>
+                                        <li>Handle route parameters</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Route Explorer - Navigate through app routes
+                                </div>
+                            </div>
+                            
+                            <!-- Day 89 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 89 – Advanced Patterns</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Higher-Order Components, Render Props
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create HOC for authentication</li>
+                                        <li>Implement render prop pattern</li>
+                                        <li>Compound components</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Pattern Master - Apply advanced patterns correctly
+                                </div>
+                            </div>
+                            
+                            <!-- Day 90 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 90 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Recipe App
+                                    <ul>
+                                        <li>Browse recipes</li>
+                                        <li>Search/filter</li>
+                                        <li>Recipe details</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 91 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 91 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 14 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 14 – State Management</h3>
+                        <div class="days">
+                            <!-- Day 92 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 92 – Redux Fundamentals</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Store, Actions, Reducers
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create Redux store</li>
+                                        <li>Define actions and reducers</li>
+                                        <li>Connect React to Redux</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Redux Architect - Build state management architecture
+                                </div>
+                            </div>
+                            
+                            <!-- Day 93 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 93 – Redux Toolkit</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Slices, Thunks, Immer
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create slice with Redux Toolkit</li>
+                                        <li>Implement async logic with thunks</li>
+                                        <li>Use Immer for immutable updates</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Toolkit Master - Simplify Redux with Toolkit
+                                </div>
+                            </div>
+                            
+                            <!-- Day 94 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 94 – React Query</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Server State, Caching, Synchronization
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Fetch data with React Query</li>
+                                        <li>Implement caching</li>
+                                        <li>Handle background updates</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Data Cache Manager - Optimize server state
+                                </div>
+                            </div>
+                            
+                            <!-- Day 95 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 95 – Zustand</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Minimal State Management
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create Zustand store</li>
+                                        <li>Implement actions</li>
+                                        <li>Subscribe to state changes</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> State Simplifier - Manage state with minimal code
+                                </div>
+                            </div>
+                            
+                            <!-- Day 96 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 96 – Performance Optimization</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Memoization, Code Splitting, Lazy Loading
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement React.memo</li>
+                                        <li>Code split routes</li>
+                                        <li>Lazy load components</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Performance Optimizer - Speed up React application
+                                </div>
+                            </div>
+                            
+                            <!-- Day 97 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 97 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> E-commerce Store
+                                    <ul>
+                                        <li>Product catalog</li>
+                                        <li>Shopping cart</li>
+                                        <li>Checkout flow</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 98 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 98 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 15 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 15 – React Ecosystem</h3>
+                        <div class="days">
+                            <!-- Day 99 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 99 – Testing React</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Jest, React Testing Library
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Test component rendering</li>
+                                        <li>Mock API calls</li>
+                                        <li>Test user interactions</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Test Champion - Cover components with tests
+                                </div>
+                            </div>
+                            
+                            <!-- Day 100 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 100 – Styling in React</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> CSS Modules, Styled Components, Tailwind
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Style with CSS Modules</li>
+                                        <li>Create styled components</li>
+                                        <li>Implement Tailwind CSS</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Style Designer - Create beautiful UI with different approaches
+                                </div>
+                            </div>
+                            
+                            <!-- Day 101 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 101 – Animation</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Framer Motion, React Spring
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Animate component entrance</li>
+                                        <li>Create gesture animations</li>
+                                        <li>Implement page transitions</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Animation Master - Bring UI to life with animations
+                                </div>
+                            </div>
+                            
+                            <!-- Day 102 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 102 – React Native</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Cross-platform Mobile Development
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create React Native app</li>
+                                        <li>Implement mobile components</li>
+                                        <li>Navigate between screens</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Mobile Builder - Construct mobile application
+                                </div>
+                            </div>
+                            
+                            <!-- Day 103 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 103 – Next.js</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> SSR, SSG, File-based Routing
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create Next.js app</li>
+                                        <li>Implement static generation</li>
+                                        <li>Add API routes</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Next.js Navigator - Build full-stack React app
+                                </div>
+                            </div>
+                            
+                            <!-- Day 104 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 104 – Monthly Project</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Social Media Dashboard
+                                    <ul>
+                                        <li>Real-time updates</li>
+                                        <li>Interactive charts</li>
+                                        <li>Responsive design</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 105 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 105 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 5 -->
+            <div class="month" data-month="5" data-category="fullstack">
+                <div class="month-header">
+                    <h2 class="month-title">Month 5 – Full Stack Integration & Deployment</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="month-content">
+                    <!-- Week 16 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 16 – MERN Integration</h3>
+                        <div class="days">
+                            <!-- Day 106 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 106 – Connecting React to Node.js</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> API Integration, CORS, Proxies
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Connect React to Express API</li>
+                                        <li>Handle CORS issues</li>
+                                        <li>Implement proxy for development</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Bridge Builder - Connect frontend and backend
+                                </div>
+                            </div>
+                            
+                            <!-- Day 107 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 107 – Authentication Flow</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> JWT, Protected Routes, Refresh Tokens
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement JWT authentication</li>
+                                        <li>Create protected routes</li>
+                                        <li>Handle token refresh</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Auth Guardian - Protect application from unauthorized access
+                                </div>
+                            </div>
+                            
+                            <!-- Day 108 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 108 – Real-time Features</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Socket.io, WebSockets
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement real-time chat</li>
+                                        <li>Create live notifications</li>
+                                        <li>Handle connection events</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Real-time Race - Win with fastest updates
+                                </div>
+                            </div>
+                            
+                            <!-- Day 109 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 109 – File Uploads</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Multer, Cloud Storage
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement file upload</li>
+                                        <li>Store files in cloud</li>
+                                        <li>Display uploaded files</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> File Collector - Upload files to unlock features
+                                </div>
+                            </div>
+                            
+                            <!-- Day 110 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 110 – State Management in Full Stack</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Global State, Synchronization
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Sync state between frontend/backend</li>
+                                        <li>Handle offline/online states</li>
+                                        <li>Implement conflict resolution</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> State Synchronizer - Keep data consistent across stack
+                                </div>
+                            </div>
+                            
+                            <!-- Day 111 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 111 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Social Media App
+                                    <ul>
+                                        <li>User profiles</li>
+                                        <li>Posts and comments</li>
+                                        <li>Real-time updates</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 112 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 112 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 17 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 17 – Deployment & DevOps</h3>
+                        <div class="days">
+                            <!-- Day 113 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 113 – Docker</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Containerization, Docker Compose
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Dockerize Node.js app</li>
+                                        <li>Containerize React app</li>
+                                        <li>Use Docker Compose for full stack</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Container Ship - Ship containers to destinations
+                                </div>
+                            </div>
+                            
+                            <!-- Day 114 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 114 – CI/CD</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> GitHub Actions, Automated Testing
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Set up CI pipeline</li>
+                                        <li>Automate testing</li>
+                                        <li>Deploy on merge</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Pipeline Builder - Connect CI/CD stages
+                                </div>
+                            </div>
+                            
+                            <!-- Day 115 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 115 – Cloud Deployment</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> AWS, Heroku, Vercel
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Deploy Node.js to Heroku</li>
+                                        <li>Host React on Vercel</li>
+                                        <li>Set up environment variables</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Cloud Launcher - Deploy apps to cloud
+                                </div>
+                            </div>
+                            
+                            <!-- Day 116 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 116 – Monitoring</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Logging, Error Tracking, Performance
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement logging</li>
+                                        <li>Set up error tracking</li>
+                                        <li>Monitor performance</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> System Monitor - Keep application healthy
+                                </div>
+                            </div>
+                            
+                            <!-- Day 117 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 117 – Security</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> HTTPS, Security Headers, Vulnerabilities
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Implement HTTPS</li>
+                                        <li>Add security headers</li>
+                                        <li>Scan for vulnerabilities</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Security Fortress - Defend against attacks
+                                </div>
+                            </div>
+                            
+                            <!-- Day 118 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 118 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> SaaS Application
+                                    <ul>
+                                        <li>User authentication</li>
+                                        <li>Subscription management</li>
+                                        <li>Analytics dashboard</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 119 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 119 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 18 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 18 – Advanced Topics</h3>
+                        <div class="days">
+                            <!-- Day 120 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 120 – GraphQL in Full Stack</div>
+                                    <div class="day-badge">Mon</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Apollo Client, Server Integration
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Connect React to GraphQL API</li>
+                                        <li>Implement queries and mutations</li>
+                                        <li>Handle caching</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> GraphQL Master - Efficient data fetching
+                                </div>
+                            </div>
+                            
+                            <!-- Day 121 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 121 – Microservices</div>
+                                    <div class="day-badge">Tue</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Service Architecture, Communication
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create microservice architecture</li>
+                                        <li>Implement service communication</li>
+                                        <li>Deploy microservices</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Service Architect - Design scalable system
+                                </div>
+                            </div>
+                            
+                            <!-- Day 122 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 122 – Serverless</div>
+                                    <div class="day-badge">Wed</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> AWS Lambda, Serverless Functions
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Create serverless API</li>
+                                        <li>Implement authentication</li>
+                                        <li>Handle file processing</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Serverless Challenge - Build without servers
+                                </div>
+                            </div>
+                            
+                            <!-- Day 123 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 123 – Progressive Web Apps</div>
+                                    <div class="day-badge">Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Service Workers, Offline Functionality
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Convert app to PWA</li>
+                                        <li>Implement service worker</li>
+                                        <li>Add offline functionality</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> PWA Builder - Create app-like web experience
+                                </div>
+                            </div>
+                            
+                            <!-- Day 124 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 124 – WebAssembly</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Performance, Rust/C++ Integration
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Integrate WebAssembly module</li>
+                                        <li>Optimize performance-critical code</li>
+                                        <li>Communicate between JS and WASM</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Performance Maximizer - Boost app speed with WASM
+                                </div>
+                            </div>
+                            
+                            <!-- Day 125 - Saturday Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 125 – Mini Project (Saturday)</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Real-time Collaboration Tool
+                                    <ul>
+                                        <li>Live document editing</li>
+                                        <li>Video conferencing</li>
+                                        <li>File sharing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Day 126 - Sunday -->
+                            <div class="day sunday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 126 – Sunday</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="leave">
+                                    <i class="fas fa-coffee"></i> Rest Day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Week 19 -->
+                    <div class="week">
+                        <h3 class="week-title">Week 19 – Capstone Project</h3>
+                        <div class="days">
+                            <!-- Day 127-130 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 127-130 – Full Stack Application</div>
+                                    <div class="day-badge">Mon-Thu</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Complete MERN Application
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Design application architecture</li>
+                                        <li>Implement all features</li>
+                                        <li>Test and optimize</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> App Builder - Construct complete application
+                                </div>
+                            </div>
+                            
+                            <!-- Day 131 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 131 – Deployment</div>
+                                    <div class="day-badge">Fri</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Production Deployment
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Deploy to cloud</li>
+                                        <li>Set up monitoring</li>
+                                        <li>Implement CI/CD</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Deployment Master - Launch application successfully
+                                </div>
+                            </div>
+                            
+                            <!-- Day 132 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 132 – Documentation</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Project Documentation, README
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Write comprehensive documentation</li>
+                                        <li>Create API documentation</li>
+                                        <li>Prepare deployment guide</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Documentation Expert - Document all aspects
+                                </div>
+                            </div>
+                            
+                            <!-- Day 133 -->
+                            <div class="day">
+                                <div class="day-header">
+                                    <div class="day-title">Day 133 – Presentation</div>
+                                    <div class="day-badge">Sun</div>
+                                </div>
+                                <div class="topic">
+                                    <strong>Topic:</strong> Project Showcase
+                                </div>
+                                <div class="tasks">
+                                    <strong>Tasks:</strong>
+                                    <ol>
+                                        <li>Prepare presentation</li>
+                                        <li>Demonstrate features</li>
+                                        <li>Explain architecture</li>
+                                    </ol>
+                                </div>
+                                <div class="game">
+                                    <strong>Game:</strong> Presentation Pro - Showcase project effectively
+                                </div>
+                            </div>
+                            
+                            <!-- Day 134 - Final Project -->
+                            <div class="day saturday">
+                                <div class="day-header">
+                                    <div class="day-title">Day 134 – Final Project</div>
+                                    <div class="day-badge">Sat</div>
+                                </div>
+                                <div class="project">
+                                    <strong>Project:</strong> Complete MERN Application
+                                    <ul>
+                                        <li>Full-featured application</li>
+                                        <li>Production-ready</li>
+                                        <li>Deployed with monitoring</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>MERN Stack Roadmap - 5-Month Learning Plan</p>
+            <p>Master full-stack development with MongoDB, Express, React, and Node.js</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Month toggle functionality
+            const monthHeaders = document.querySelectorAll('.month-header');
+            monthHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const month = this.parentElement;
+                    month.classList.toggle('active');
+                });
+            });
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    const months = document.querySelectorAll('.month');
+                    
+                    months.forEach(month => {
+                        if (filter === 'all') {
+                            month.style.display = 'block';
+                        } else {
+                            const category = month.getAttribute('data-category');
+                            if (category === filter) {
+                                month.style.display = 'block';
+                            } else {
+                                month.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Progress tracking
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const totalDays = 134; // Total number of days in the roadmap
+            let completedDays = parseInt(localStorage.getItem('completedDays')) || 0;
+            
+            // Update progress bar
+            function updateProgress() {
+                const progressPercentage = Math.round((completedDays / totalDays) * 100);
+                progressBar.style.width = progressPercentage + '%';
+                progressText.textContent = progressPercentage + '% Complete';
+                localStorage.setItem('completedDays', completedDays);
+            }
+            
+            // Add click event to days to mark as completed
+            const dayHeaders = document.querySelectorAll('.day-header');
+            dayHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    // Don't trigger when clicking on the badge
+                    if (e.target.classList.contains('day-badge')) return;
+                    
+                    const day = this.parentElement;
+                    day.classList.toggle('completed');
+                    
+                    if (day.classList.contains('completed')) {
+                        completedDays++;
+                    } else {
+                        completedDays--;
+                    }
+                    
+                    updateProgress();
+                });
+            });
+            
+            // Initialize progress on page load
+            updateProgress();
+            
+            // Restore completed days from localStorage
+            const savedCompletedDays = JSON.parse(localStorage.getItem('savedCompletedDays')) || [];
+            savedCompletedDays.forEach(dayIndex => {
+                const days = document.querySelectorAll('.day');
+                if (days[dayIndex]) {
+                    days[dayIndex].classList.add('completed');
+                }
+            });
+            
+            // Save completed days to localStorage
+            function saveCompletedDays() {
+                const completedDaysArray = [];
+                const days = document.querySelectorAll('.day');
+                days.forEach((day, index) => {
+                    if (day.classList.contains('completed')) {
+                        completedDaysArray.push(index);
+                    }
+                });
+                localStorage.setItem('savedCompletedDays', JSON.stringify(completedDaysArray));
+            }
+            
+            // Update save function when days are clicked
+            dayHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    setTimeout(saveCompletedDays, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
